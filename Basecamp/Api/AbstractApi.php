@@ -25,6 +25,7 @@ abstract class AbstractApi
 
         // Fetch next pages
         $page = 2;
+        $response = is_countable($response) ? $response : [];
         $response_count = count($response);
         while ($response_count == $this->page_size) {
           $next_params = empty($params) ? ['page' => $page] : array_merge($params, ['page' => $page]);
