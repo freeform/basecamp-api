@@ -23,9 +23,12 @@ abstract class AbstractApi
         $resource = empty($params) ? $resource : ($resource . (false === strpos($resource, '?') ? '?' : '&') . http_build_query($params, '', '&'));
         $response = $this->client->request(Request::METHOD_GET, $resource, [], $this->timeout);
 
+        if (!is_countable($response)) {
+          return $response;
+        }
+
         // Fetch next pages
         $page = 2;
-        $response = is_countable($response) ? $response : [];
         $response_count = count($response);
         while ($response_count == $this->page_size) {
           $next_params = empty($params) ? ['page' => $page] : array_merge($params, ['page' => $page]);
