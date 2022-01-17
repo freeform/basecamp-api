@@ -18,8 +18,8 @@ use Basecamp\Api\Todos;
 use Basecamp\Api\Topics;
 use Basecamp\Api\Uploads;
 use Buzz\Client\Curl;
-use Buzz\Message\Request;
-use Buzz\Message\Response;
+use Nyholm\Psr7\Factory\Psr17Factory;
+use Nyholm\Psr7\Request;
 
 /**
  * Class Client.
@@ -35,6 +35,13 @@ class Client
      * @var array
      */
     private $accountData = null;
+
+    /**
+     * PSR17Factory
+     *
+     * @var Psr17Factory
+     */
+    protected $psr17Factory;
 
     /**
      * Class constructor.
@@ -53,6 +60,7 @@ class Client
     public function __construct(array $accountData)
     {
         $this->accountData = $accountData;
+        $this->psr17Factory = new Psr17Factory();
     }
 
     /**
@@ -73,10 +81,12 @@ class Client
      * Create Curl client object.
      *
      * Override to use Buzz extensions, for example CachedCurl
+     *
+     * @param array $options
      */
-    public function createCurl()
+    public function createCurl($options)
     {
-        return new Curl();
+        return new Curl($this->psr17Factory, $options);
     }
 
     /**
@@ -259,30 +269,31 @@ class Client
             $headers[] = 'If-None-Match: '.$etag;
         }
 
-        $message = new Request($method, $resource, self::BASE_URL.$this->getAccountData()['accountId'].self::API_VERSION);
-        $message->setHeaders($headers);
+        $request = $this->psr17Factory->createRequest($method, $resource, self::BASE_URL.$this->getAccountData()['accountId'].self::API_VERSION);
+        $request->setHeaders($headers);
 
         if (!empty($params)) {
             // When attaching files set content as is
             if (array_key_exists('binary', $params)) {
-                $message->setContent($params['binary']);
+                $request->setContent($params['binary']);
             } else {
-                $message->setContent(json_encode($params));
+                $request->setContent(json_encode($params));
             }
         }
 
-        $response = new Response();
-
-        $bc = $this->createCurl();
-        $bc->setTimeout($timeout);
+        $options = [
+            'timeout' => $timeout,
+        ];
 
         if (!empty($this->getAccountData()['login']) && !empty($this->getAccountData()['password'])) {
-            $bc->setOption(CURLOPT_USERPWD, $this->getAccountData()['login'].':'.$this->getAccountData()['password']);
+            $options[CURLOPT_USERPWD] = $this->getAccountData()['login'].':'.$this->getAccountData()['password'];
         } elseif (!empty($this->getAccountData()['token'])) {
-            $message->addHeader('Authorization: Bearer '.$this->getAccountData()['token']);
+            $request->addHeader('Authorization: Bearer '.$this->getAccountData()['token']);
         }
 
-        $bc->send($message, $response);
+        $bc = $this->createCurl($options);
+
+        $response = $bc->sendRequest($request);
 
         $storage->put($hash, trim($response->getHeader('ETag'), '"'));
 
@@ -315,7 +326,7 @@ class Client
                 $data->message = '429 Too Many Requests. '.$response->getHeader('Retry-After');
                 break;
             case 500:
-                $data->message = '500 Hmm, that isn’t right';
+                $data->message = '500 Hmm, that is not right';
                 break;
             case 502:
                 $data->message = '502 Bad Gateway';
