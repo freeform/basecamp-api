@@ -269,8 +269,7 @@ class Client
             $headers[] = 'If-None-Match: '.$etag;
         }
 
-        $request = $this->psr17Factory->createRequest($method, $resource, self::BASE_URL.$this->getAccountData()['accountId'].self::API_VERSION);
-        $request->setHeaders($headers);
+        $request = $this->psr17Factory->createRequest($method, $resource, $headers, self::BASE_URL.$this->getAccountData()['accountId'].self::API_VERSION);
 
         if (!empty($params)) {
             // When attaching files set content as is
