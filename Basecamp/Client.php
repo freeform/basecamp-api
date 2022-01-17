@@ -18,8 +18,8 @@ use Basecamp\Api\Todos;
 use Basecamp\Api\Topics;
 use Basecamp\Api\Uploads;
 use Buzz\Client\Curl;
-use Nyholm\Psr7\Factory\Psr17Factory;
-use Nyholm\Psr7\Request;
+use Buzz\Message\Request;
+use Buzz\Message\Response;
 
 /**
  * Class Client.
@@ -35,13 +35,6 @@ class Client
      * @var array
      */
     private $accountData = null;
-
-    /**
-     * PSR17Factory
-     *
-     * @var Psr17Factory
-     */
-    protected $psr17Factory;
 
     /**
      * Class constructor.
@@ -60,7 +53,6 @@ class Client
     public function __construct(array $accountData)
     {
         $this->accountData = $accountData;
-        $this->psr17Factory = new Psr17Factory();
     }
 
     /**
@@ -81,12 +73,10 @@ class Client
      * Create Curl client object.
      *
      * Override to use Buzz extensions, for example CachedCurl
-     *
-     * @param array $options
      */
-    public function createCurl($options)
+    public function createCurl()
     {
-        return new Curl($this->psr17Factory, $options);
+        return new Curl();
     }
 
     /**
@@ -269,30 +259,30 @@ class Client
             $headers[] = 'If-None-Match: '.$etag;
         }
 
-        $request = $this->psr17Factory->createRequest($method, $resource, $headers, self::BASE_URL.$this->getAccountData()['accountId'].self::API_VERSION);
+        $message = new Request($method, $resource, self::BASE_URL.$this->getAccountData()['accountId'].self::API_VERSION);
+        $message->setHeaders($headers);
 
         if (!empty($params)) {
             // When attaching files set content as is
             if (array_key_exists('binary', $params)) {
-                $request->setContent($params['binary']);
+                $message->setContent($params['binary']);
             } else {
-                $request->setContent(json_encode($params));
+                $message->setContent(json_encode($params));
             }
         }
 
-        $options = [
-            'timeout' => $timeout,
-        ];
+        $response = new Response();
+
+        $bc = $this->createCurl();
+        $bc->setTimeout($timeout);
 
         if (!empty($this->getAccountData()['login']) && !empty($this->getAccountData()['password'])) {
-            $options[CURLOPT_USERPWD] = $this->getAccountData()['login'].':'.$this->getAccountData()['password'];
+            $bc->setOption(CURLOPT_USERPWD, $this->getAccountData()['login'].':'.$this->getAccountData()['password']);
         } elseif (!empty($this->getAccountData()['token'])) {
-            $request->addHeader('Authorization: Bearer '.$this->getAccountData()['token']);
+            $message->addHeader('Authorization: Bearer '.$this->getAccountData()['token']);
         }
 
-        $bc = $this->createCurl($options);
-
-        $response = $bc->sendRequest($request);
+        $bc->send($message, $response);
 
         $storage->put($hash, trim($response->getHeader('ETag'), '"'));
 
