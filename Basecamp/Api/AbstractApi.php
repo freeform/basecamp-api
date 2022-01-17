@@ -2,6 +2,7 @@
 namespace Basecamp\Api;
 
 use Basecamp\Client;
+use Buzz\Message\Request;
 
 /**
  * Class AbstractApi.
