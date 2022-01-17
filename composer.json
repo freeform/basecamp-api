@@ -1,6 +1,6 @@
 {
-    "name": "arturf/basecamp-api",
-    "description": "PHP wrapper for new Basecamp API",
+    "name": "freeform/basecamp-api",
+    "description": "PHP wrapper for Basecamp 2 API, forked from arturf",
     "keywords": ["37Signals", "Basecamp", "PHP", "API"],
     "license": "MIT",
     "authors": [
@@ -10,8 +10,8 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
-        "kriswallsmith/buzz": "0.*"
+        "php": ">=7.4.0",
+        "kriswallsmith/buzz": "^1.0"
     },
     "autoload":{
         "psr-0":{
