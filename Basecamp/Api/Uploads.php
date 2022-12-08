@@ -18,7 +18,7 @@ class Uploads extends AbstractApi
      */
     public function show($projectId, $uploadId)
     {
-        $data = $this->get('/projects/' . $projectId . '/uploads/' . $uploadId . '.json');
+        $data = $this->get('projects/' . $projectId . '/uploads/' . $uploadId . '.json');
 
         return $data;
     }
@@ -33,7 +33,7 @@ class Uploads extends AbstractApi
      */
     public function create($projectId, array $params)
     {
-        $data = $this->post('/projects/' . $projectId . '/uploads.json', $params);
+        $data = $this->post('projects/' . $projectId . '/uploads.json', $params);
 
         return $data;
     }

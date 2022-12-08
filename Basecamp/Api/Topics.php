@@ -17,7 +17,7 @@ class Topics extends AbstractApi
      */
     public function all($page = 1)
     {
-        $data = $this->get('/topics.json', [
+        $data = $this->get('topics.json', [
             'page' => $page,
         ]);
 
@@ -34,7 +34,7 @@ class Topics extends AbstractApi
      */
     public function allByProject($projectId, $page = 1)
     {
-        $data = $this->get('/projects/' . $projectId . '/topics.json', [
+        $data = $this->get('projects/' . $projectId . '/topics.json', [
             'page' => $page,
         ]);
 
@@ -49,7 +49,7 @@ class Topics extends AbstractApi
      */
     public function archive($projectId, $topicId)
     {
-        $data = $this->put(sprintf('/projects/%d/topics/%d/archive.json', $projectId, $topicId), []);
+        $data = $this->put(sprintf('projects/%d/topics/%d/archive.json', $projectId, $topicId), []);
 
         return $data;
     }
@@ -62,7 +62,7 @@ class Topics extends AbstractApi
      */
     public function activate($projectId, $topicId)
     {
-        $data = $this->put(sprintf('/projects/%d/topics/%d/activate.json', $projectId, $topicId), []);
+        $data = $this->put(sprintf('projects/%d/topics/%d/activate.json', $projectId, $topicId), []);
 
         return $data;
     }

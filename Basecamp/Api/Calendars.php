@@ -15,7 +15,7 @@ class Calendars extends AbstractApi
      */
     public function all()
     {
-        $data = $this->get('/calendars.json');
+        $data = $this->get('calendars.json');
 
         return $data;
     }
@@ -29,7 +29,7 @@ class Calendars extends AbstractApi
      */
     public function show($calendarId)
     {
-        $data = $this->get('/calendars/' . $calendarId . '.json');
+        $data = $this->get('calendars/' . $calendarId . '.json');
 
         return $data;
     }
@@ -43,7 +43,7 @@ class Calendars extends AbstractApi
      */
     public function create(array $params)
     {
-        $data = $this->post('/calendars.json', $params);
+        $data = $this->post('calendars.json', $params);
 
         return $data;
     }
@@ -58,7 +58,7 @@ class Calendars extends AbstractApi
      */
     public function update($calendarId, array $params)
     {
-        $data = $this->put('/calendars/' . $calendarId . '.json', $params);
+        $data = $this->put('calendars/' . $calendarId . '.json', $params);
 
         return $data;
     }
@@ -72,7 +72,7 @@ class Calendars extends AbstractApi
      */
     public function remove($calendarId)
     {
-        $data = $this->delete('/calendars/' . $calendarId . '.json');
+        $data = $this->delete('calendars/' . $calendarId . '.json');
 
         return $data;
     }

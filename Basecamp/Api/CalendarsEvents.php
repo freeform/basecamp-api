@@ -17,7 +17,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function projectEvents($projectId, array $params = [])
     {
-        $data = $this->get('/projects/' . $projectId . '/calendar_events.json', $params);
+        $data = $this->get('projects/' . $projectId . '/calendar_events.json', $params);
 
         return $data;
     }
@@ -31,7 +31,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function projectEventsPast($projectId)
     {
-        $data = $this->get('/projects/' . $projectId . '/calendar_events/past.json');
+        $data = $this->get('projects/' . $projectId . '/calendar_events/past.json');
 
         return $data;
     }
@@ -46,7 +46,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function projectEvent($projectId, $eventId)
     {
-        $data = $this->get('/projects/' . $projectId . '/calendar_events/' . $eventId . '.json');
+        $data = $this->get('projects/' . $projectId . '/calendar_events/' . $eventId . '.json');
 
         return $data;
     }
@@ -61,7 +61,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function projectEventCreate($projectId, array $params)
     {
-        $data = $this->post('/projects/' . $projectId . '/calendar_events.json', $params);
+        $data = $this->post('projects/' . $projectId . '/calendar_events.json', $params);
 
         return $data;
     }
@@ -77,7 +77,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function projectEventUpdate($projectId, $eventId, array $params)
     {
-        $data = $this->put('/projects/' . $projectId . '/calendar_events/' . $eventId . '.json', $params);
+        $data = $this->put('projects/' . $projectId . '/calendar_events/' . $eventId . '.json', $params);
 
         return $data;
     }
@@ -92,7 +92,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function projectEventDelete($projectId, $eventId)
     {
-        $data = $this->delete('/projects/' . $projectId . '/calendar_events/' . $eventId . '.json');
+        $data = $this->delete('projects/' . $projectId . '/calendar_events/' . $eventId . '.json');
 
         return $data;
     }
@@ -106,7 +106,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function calendarEvents($calendarId)
     {
-        $data = $this->get('/calendars/' . $calendarId . '/calendar_events.json');
+        $data = $this->get('calendars/' . $calendarId . '/calendar_events.json');
 
         return $data;
     }
@@ -120,7 +120,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function calendarEventsPast($calendarId)
     {
-        $data = $this->get('/calendars/' . $calendarId . '/calendar_events/past.json');
+        $data = $this->get('calendars/' . $calendarId . '/calendar_events/past.json');
 
         return $data;
     }
@@ -135,7 +135,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function calendarEvent($calendarId, $eventId)
     {
-        $data = $this->get('/calendars/' . $calendarId . '/calendar_events/' . $eventId . '.json');
+        $data = $this->get('calendars/' . $calendarId . '/calendar_events/' . $eventId . '.json');
 
         return $data;
     }
@@ -150,7 +150,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function calendarEventCreate($calendarId, array $params)
     {
-        $data = $this->post('/calendars/' . $calendarId . '/calendar_events.json', $params);
+        $data = $this->post('calendars/' . $calendarId . '/calendar_events.json', $params);
 
         return $data;
     }
@@ -166,7 +166,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function calendarEventUpdate($calendarId, $eventId, array $params)
     {
-        $data = $this->put('/calendars/' . $calendarId . '/calendar_events/' . $eventId . '.json', $params);
+        $data = $this->put('calendars/' . $calendarId . '/calendar_events/' . $eventId . '.json', $params);
 
         return $data;
     }
@@ -181,7 +181,7 @@ class CalendarsEvents extends AbstractApi
      */
     public function calendarEventDelete($calendarId, $eventId)
     {
-        $data = $this->delete('/calendars/' . $calendarId . '/calendar_events/' . $eventId . '.json');
+        $data = $this->delete('calendars/' . $calendarId . '/calendar_events/' . $eventId . '.json');
 
         return $data;
     }

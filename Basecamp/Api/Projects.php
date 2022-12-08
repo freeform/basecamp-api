@@ -15,7 +15,7 @@ class Projects extends AbstractApi
      */
     public function active()
     {
-        $data = $this->get('/projects.json');
+        $data = $this->get('projects.json');
 
         return $data;
     }
@@ -27,7 +27,7 @@ class Projects extends AbstractApi
      */
     public function archived()
     {
-        $data = $this->get('/projects/archived.json');
+        $data = $this->get('projects/archived.json');
 
         return $data;
     }
@@ -41,7 +41,7 @@ class Projects extends AbstractApi
      */
     public function show($projectId)
     {
-        $data = $this->get('/projects/' . $projectId . '.json');
+        $data = $this->get('projects/' . $projectId . '.json');
 
         return $data;
     }
@@ -55,7 +55,7 @@ class Projects extends AbstractApi
      */
     public function create(array $params)
     {
-        $data = $this->post('/projects.json', $params);
+        $data = $this->post('projects.json', $params);
 
         return $data;
     }
@@ -70,7 +70,7 @@ class Projects extends AbstractApi
      */
     public function update($projectId, array $params)
     {
-        $data = $this->put('/projects/' . $projectId . '.json', $params);
+        $data = $this->put('projects/' . $projectId . '.json', $params);
 
         return $data;
     }
@@ -84,7 +84,7 @@ class Projects extends AbstractApi
      */
     public function remove($projectId)
     {
-        $data = $this->delete('/projects/' . $projectId . '.json');
+        $data = $this->delete('projects/' . $projectId . '.json');
 
         return $data;
     }

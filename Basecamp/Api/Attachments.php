@@ -15,7 +15,7 @@ class Attachments extends AbstractApi
      */
     public function all()
     {
-        $data = $this->get('/attachments.json');
+        $data = $this->get('attachments.json');
 
         return $data;
     }
@@ -29,7 +29,7 @@ class Attachments extends AbstractApi
      */
     public function projectAll($projectId)
     {
-        $data = $this->get('/projects/' . $projectId . '/attachments.json');
+        $data = $this->get('projects/' . $projectId . '/attachments.json');
 
         return $data;
     }
@@ -58,7 +58,7 @@ class Attachments extends AbstractApi
      */
     public function create($binary)
     {
-        $data = $this->post('/attachments.json', ['binary' => $binary]);
+        $data = $this->post('attachments.json', ['binary' => $binary]);
 
         return $data;
     }

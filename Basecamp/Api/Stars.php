@@ -15,7 +15,7 @@ class Stars extends AbstractApi
      */
     public function all()
     {
-        $data = $this->get('/stars.json');
+        $data = $this->get('stars.json');
 
         return $data;
     }
@@ -29,7 +29,7 @@ class Stars extends AbstractApi
      */
     public function star($projectId)
     {
-        $data = $this->post('/projects/' . $projectId . '/star.json', []);
+        $data = $this->post('projects/' . $projectId . '/star.json', []);
 
         return $data;
     }
@@ -43,7 +43,7 @@ class Stars extends AbstractApi
      */
     public function unstar($projectId)
     {
-        $data = $this->delete('/projects/' . $projectId . '/star.json');
+        $data = $this->delete('projects/' . $projectId . '/star.json');
 
         return $data;
     }

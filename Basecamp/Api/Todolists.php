@@ -15,7 +15,7 @@ class Todolists extends AbstractApi
      */
     public function all()
     {
-        $data = $this->get('/todolists.json');
+        $data = $this->get('todolists.json');
 
         return $data;
     }
@@ -27,7 +27,7 @@ class Todolists extends AbstractApi
      */
     public function completed()
     {
-        $data = $this->get('/todolists/completed.json');
+        $data = $this->get('todolists/completed.json');
 
         return $data;
     }
@@ -41,7 +41,7 @@ class Todolists extends AbstractApi
      */
     public function allByProject($projectId)
     {
-        $data = $this->get('/projects/' . $projectId . '/todolists.json');
+        $data = $this->get('projects/' . $projectId . '/todolists.json');
 
         return $data;
     }
@@ -55,7 +55,7 @@ class Todolists extends AbstractApi
      */
     public function completedByProject($projectId)
     {
-        $data = $this->get('/projects/' . $projectId . '/todolists/completed.json');
+        $data = $this->get('projects/' . $projectId . '/todolists/completed.json');
 
         return $data;
     }
@@ -70,7 +70,7 @@ class Todolists extends AbstractApi
      */
     public function show($projectId, $todolistId)
     {
-        $data = $this->get('/projects/' . $projectId . '/todolists/' . $todolistId . '.json');
+        $data = $this->get('projects/' . $projectId . '/todolists/' . $todolistId . '.json');
 
         return $data;
     }
@@ -84,7 +84,7 @@ class Todolists extends AbstractApi
      */
     public function assigned($userId)
     {
-        $data = $this->get('/people/' . $userId . '/assigned_todos.json');
+        $data = $this->get('people/' . $userId . '/assigned_todos.json');
 
         return $data;
     }
@@ -99,7 +99,7 @@ class Todolists extends AbstractApi
      */
     public function create($projectId, array $params)
     {
-        $data = $this->post('/projects/' . $projectId . '/todolists.json', $params);
+        $data = $this->post('projects/' . $projectId . '/todolists.json', $params);
 
         return $data;
     }
@@ -115,7 +115,7 @@ class Todolists extends AbstractApi
      */
     public function update($projectId, $todolistId, array $params)
     {
-        $data = $this->put('/projects/' . $projectId . '/todolists/' . $todolistId . '.json', $params);
+        $data = $this->put('projects/' . $projectId . '/todolists/' . $todolistId . '.json', $params);
 
         return $data;
     }
@@ -130,7 +130,7 @@ class Todolists extends AbstractApi
      */
     public function remove($projectId, $todolistId)
     {
-        $data = $this->delete('/projects/' . $projectId . '/todolists/' . $todolistId . '.json');
+        $data = $this->delete('projects/' . $projectId . '/todolists/' . $todolistId . '.json');
 
         return $data;
     }

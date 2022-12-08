@@ -18,7 +18,7 @@ class Events extends AbstractApi
      */
     public function all($since, $page = 1)
     {
-        $data = $this->get('/events.json', [
+        $data = $this->get('events.json', [
             'since' => $since,
             'page' => $page,
         ]);
@@ -37,7 +37,7 @@ class Events extends AbstractApi
      */
     public function allByProject($projectId, $since, $page = 1)
     {
-        $data = $this->get('/projects/' . $projectId . '/events.json', [
+        $data = $this->get('projects/' . $projectId . '/events.json', [
             'since' => $since,
             'page' => $page,
         ]);
@@ -56,7 +56,7 @@ class Events extends AbstractApi
      */
     public function allByPerson($userId, $since, $page = 1)
     {
-        $data = $this->get('/people/' . $userId . '/events.json', [
+        $data = $this->get('people/' . $userId . '/events.json', [
             'since' => $since,
             'page' => $page,
         ]);

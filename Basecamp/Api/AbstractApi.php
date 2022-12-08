@@ -21,7 +21,7 @@ abstract class AbstractApi
     final protected function get($resource, array $params = [])
     {
         $resource = empty($params) ? $resource : ($resource . (false === strpos($resource, '?') ? '?' : '&') . http_build_query($params, '', '&'));
-        $response = $this->client->request(Request::METHOD_GET, $resource, [], $this->timeout);
+        $response = $this->client->request('GET', $resource, [], $this->timeout);
 
         if (!is_countable($response)) {
           return $response;
@@ -33,7 +33,7 @@ abstract class AbstractApi
         while ($response_count == $this->page_size) {
           $next_params = empty($params) ? ['page' => $page] : array_merge($params, ['page' => $page]);
           $next_resource = ($resource . (false === strpos($resource, '?') ? '?' : '&') . http_build_query($next_params, '', '&'));
-          $next_response = $this->client->request(Request::METHOD_GET, $next_resource, [], $this->timeout);
+          $next_response = $this->client->request('GET', $next_resource, [], $this->timeout);
           if (!empty($next_response)) {
             $response = array_merge($response, $next_response);
           }
@@ -46,21 +46,21 @@ abstract class AbstractApi
 
     final protected function post($resource, array $params)
     {
-        $response = $this->client->request(Request::METHOD_POST, $resource, $params, $this->timeout);
+        $response = $this->client->request('POST', $resource, $params, $this->timeout);
 
         return $response;
     }
 
     final protected function put($resource, array $params)
     {
-        $response = $this->client->request(Request::METHOD_PUT, $resource, $params, $this->timeout);
+        $response = $this->client->request('PUT', $resource, $params, $this->timeout);
 
         return $response;
     }
 
     final protected function delete($resource)
     {
-        $response = $this->client->request(Request::METHOD_DELETE, $resource, [], $this->timeout);
+        $response = $this->client->request('DELETE', $resource, [], $this->timeout);
 
         return $response;
     }

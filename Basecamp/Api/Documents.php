@@ -15,7 +15,7 @@ class Documents extends AbstractApi
      */
     public function all()
     {
-        $data = $this->get('/documents.json');
+        $data = $this->get('documents.json');
 
         return $data;
     }
@@ -29,7 +29,7 @@ class Documents extends AbstractApi
      */
     public function allByProject($projectId)
     {
-        $data = $this->get('/projects/' . $projectId . '/documents.json');
+        $data = $this->get('projects/' . $projectId . '/documents.json');
 
         return $data;
     }
@@ -44,7 +44,7 @@ class Documents extends AbstractApi
      */
     public function show($projectId, $docId)
     {
-        $data = $this->get('/projects/' . $projectId . '/documents/' . $docId . '.json');
+        $data = $this->get('projects/' . $projectId . '/documents/' . $docId . '.json');
 
         return $data;
     }
@@ -59,7 +59,7 @@ class Documents extends AbstractApi
      */
     public function create($projectId, array $params)
     {
-        $data = $this->post('/projects/' . $projectId . '/documents.json', $params);
+        $data = $this->post('projects/' . $projectId . '/documents.json', $params);
 
         return $data;
     }
@@ -75,7 +75,7 @@ class Documents extends AbstractApi
      */
     public function update($projectId, $docId, array $params)
     {
-        $data = $this->put('/projects/' . $projectId . '/documents/' . $docId . '.json', $params);
+        $data = $this->put('projects/' . $projectId . '/documents/' . $docId . '.json', $params);
 
         return $data;
     }
@@ -90,7 +90,7 @@ class Documents extends AbstractApi
      */
     public function remove($projectId, $docId)
     {
-        $data = $this->delete('/projects/' . $projectId . '/documents/' . $docId . '.json');
+        $data = $this->delete('projects/' . $projectId . '/documents/' . $docId . '.json');
 
         return $data;
     }

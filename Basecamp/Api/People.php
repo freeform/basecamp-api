@@ -15,7 +15,7 @@ class People extends AbstractApi
      */
     public function all()
     {
-        $data = $this->get('/people.json');
+        $data = $this->get('people.json');
 
         return $data;
     }
@@ -29,7 +29,7 @@ class People extends AbstractApi
      */
     public function show($userId)
     {
-        $data = $this->get('/people/' . $userId . '.json');
+        $data = $this->get('people/' . $userId . '.json');
 
         return $data;
     }
@@ -43,7 +43,7 @@ class People extends AbstractApi
      */
     public function remove($userId)
     {
-        $data = $this->delete('/people/' . $userId . '.json');
+        $data = $this->delete('people/' . $userId . '.json');
 
         return $data;
     }

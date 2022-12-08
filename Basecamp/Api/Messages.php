@@ -18,7 +18,7 @@ class Messages extends AbstractApi
      */
     public function show($projectId, $messageId)
     {
-        $data = $this->get('/projects/' . $projectId . '/messages/' . $messageId . '.json');
+        $data = $this->get('projects/' . $projectId . '/messages/' . $messageId . '.json');
 
         return $data;
     }
@@ -33,7 +33,7 @@ class Messages extends AbstractApi
      */
     public function create($projectId, array $params)
     {
-        $data = $this->post('/projects/' . $projectId . '/messages.json', $params);
+        $data = $this->post('projects/' . $projectId . '/messages.json', $params);
 
         return $data;
     }
@@ -49,7 +49,7 @@ class Messages extends AbstractApi
      */
     public function update($projectId, $messageId, array $params)
     {
-        $data = $this->put('/projects/' . $projectId . '/messages/' . $messageId . '.json', $params);
+        $data = $this->put('projects/' . $projectId . '/messages/' . $messageId . '.json', $params);
 
         return $data;
     }
@@ -64,7 +64,7 @@ class Messages extends AbstractApi
      */
     public function remove($projectId, $messageId)
     {
-        $data = $this->delete('/projects/' . $projectId . '/messages/' . $messageId . '.json');
+        $data = $this->delete('projects/' . $projectId . '/messages/' . $messageId . '.json');
 
         return $data;
     }

@@ -17,7 +17,7 @@ class Accesses extends AbstractApi
      */
     public function project($projectId)
     {
-        $data = $this->get('/projects/' . $projectId . '/accesses.json');
+        $data = $this->get('projects/' . $projectId . '/accesses.json');
 
         return $data;
     }
@@ -32,7 +32,7 @@ class Accesses extends AbstractApi
      */
     public function grantProject($projectId, array $userIds)
     {
-        $data = $this->post('/projects/' . $projectId . '/accesses.json', $userIds);
+        $data = $this->post('projects/' . $projectId . '/accesses.json', $userIds);
 
         return $data;
     }
@@ -47,7 +47,7 @@ class Accesses extends AbstractApi
      */
     public function revokeProject($projectId, $userId)
     {
-        $data = $this->delete('/projects/' . $projectId . '/accesses/' . $userId . '.json');
+        $data = $this->delete('projects/' . $projectId . '/accesses/' . $userId . '.json');
 
         return $data;
     }
@@ -61,7 +61,7 @@ class Accesses extends AbstractApi
      */
     public function calendar($calendarId)
     {
-        $data = $this->get('/calendars/' . $calendarId . '/accesses.json');
+        $data = $this->get('calendars/' . $calendarId . '/accesses.json');
 
         return $data;
     }
@@ -76,7 +76,7 @@ class Accesses extends AbstractApi
      */
     public function grantCalendar($calendarId, array $userIds)
     {
-        $data = $this->post('/calendars/' . $calendarId . '/accesses.json', $userIds);
+        $data = $this->post('calendars/' . $calendarId . '/accesses.json', $userIds);
 
         return $data;
     }
@@ -91,7 +91,7 @@ class Accesses extends AbstractApi
      */
     public function revokeCalendar($calendarId, $userId)
     {
-        $data = $this->delete('/projects/' . $calendarId . '/accesses/' . $userId . '.json');
+        $data = $this->delete('projects/' . $calendarId . '/accesses/' . $userId . '.json');
 
         return $data;
     }
