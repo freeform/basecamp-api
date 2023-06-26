@@ -235,8 +235,9 @@ class Client
     public function request($method, $resource, $params = [], $timeout = 10)
     {
         $headers = [
-            'User-Agent: ' . $this->getAccountData()['appName'],
-            'Content-Type: application/json',
+            'User-Agent' => $this->getAccountData()['appName'],
+            'Content-Type' => 'application/json',
+            'Accept' => 'application/json',
         ];
 
         $storage = Storage::get();
@@ -244,7 +245,7 @@ class Client
         $etag = $storage->get($hash);
 
         if ($etag) {
-            $headers[] = 'If-None-Match: ' . $etag;
+            $headers['If-None-Match'] = $etag;
         }
 
         if (!empty($params)) {
@@ -261,7 +262,7 @@ class Client
                 CURLOPT_USERPWD => $this->getAccountData()['login'] . ':' . $this->getAccountData()['password']
             ];
         } elseif (!empty($this->getAccountData()['token'])) {
-            $headers[] = 'Authorization: Bearer ' . $this->getAccountData()['token'];
+            $headers['Authorization'] = 'Bearer ' . $this->getAccountData()['token'];
         }
 
         $configuration = [
